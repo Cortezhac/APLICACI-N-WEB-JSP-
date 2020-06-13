@@ -25,7 +25,7 @@ public abstract class ConexionDB {
     /**
      * Retorna un conjunto de datos con la consulta introducida
      * @param sqlQuery 
-     * @return ResulSet
+     * @return ResulSet Un conjunto de datos de la BD
      */
     public ResultSet consultaSQL(String sqlQuery){
         Statement statement; // Ejecuta la consulta
@@ -38,5 +38,34 @@ public abstract class ConexionDB {
         }
         return resultSet;
     }
-    
+    /**
+     * Ejecuta consultas a la Base de datos
+     * @return boolean Estado de la consulta
+     */
+    public boolean ejecutarSQL(String consulta){
+        Statement statement;
+        boolean guardar = true;
+        try {
+            statement = conexion.createStatement();
+            statement.executeUpdate(consulta);
+        } catch (SQLException e) {
+            guardar = false;
+            e.printStackTrace();
+        }
+        return guardar;
+    }
+    /**
+     * Cierra la conexion con la base de datos
+     * @return boolean estado de la conexion 
+     */
+    public boolean cerraConexion(){
+        boolean ok = true;
+        try {
+            conexion.close();
+        } catch (SQLException e) {
+            ok = false;
+            e.printStackTrace();
+        }
+        return ok;
+    }
 }
