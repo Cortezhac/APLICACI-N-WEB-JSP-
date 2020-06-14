@@ -14,7 +14,10 @@ import java.sql.SQLException;
  * @author Admin
  */
 public final class MySQLConexionFactory extends ConexionDB{
-    
+    /**
+     * Constructor de la Conexion con la BD
+     * @param parametros Nombre de la tabla, Ususario, Clave
+     */
     public MySQLConexionFactory(String[] parametros){
         this.parametros = parametros;
         this.open(); // llamar a la funcion abrirconexion
@@ -24,7 +27,7 @@ public final class MySQLConexionFactory extends ConexionDB{
     Connection open() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            //                                              direccion bd                                          user                 pass
+            //                                              direccion bd                     tabla                  user                 pass
             this.conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.parametros[0], this.parametros[1],this.parametros[2]);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

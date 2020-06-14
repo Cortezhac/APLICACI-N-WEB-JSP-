@@ -15,7 +15,7 @@ import java.util.List;
 public interface CategoriaDAO {
     public List<Categoria> Listar();
     public List<Categoria> Listar2();
-    public Categoria editarCat();
-    public boolean guardarCat();
+    public Categoria editarCat(int idCategoria);
+    public boolean guardarCat(Categoria categoria);
     public boolean borrarCat();
 }
