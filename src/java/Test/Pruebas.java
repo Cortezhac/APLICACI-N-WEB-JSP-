@@ -17,7 +17,9 @@ import java.util.List;
 public class Pruebas {
     public static void main(String[] args) {
         Pruebas evaluar = new Pruebas();
-        evaluar.guardar();
+        //evaluar.guardar();
+        evaluar.listar();
+        evaluar.eliminar();
         evaluar.listar();
         //evaluar.editar();
     }
@@ -46,5 +48,10 @@ public class Pruebas {
         guardar.setNom_categoria("Bebidas");
         guardar.setEstado_categoria(1);
         categoria.guardarCat(guardar);
+    }
+    
+    public void eliminar(){
+        CategoriaDAO categoria = new CategoriaImplemtarDAO();
+        categoria.borrarCat(2);
     }
 }

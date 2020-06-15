@@ -17,5 +17,5 @@ public interface CategoriaDAO {
     public List<Categoria> Listar2();
     public Categoria editarCat(int idCategoria);
     public boolean guardarCat(Categoria categoria);
-    public boolean borrarCat();
+    public boolean borrarCat(int id_categotia);
 }

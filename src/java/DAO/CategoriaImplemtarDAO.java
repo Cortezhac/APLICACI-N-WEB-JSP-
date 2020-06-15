@@ -110,9 +110,19 @@ public class CategoriaImplemtarDAO implements CategoriaDAO{
     }
 
     @Override
-    public boolean borrarCat() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+    public boolean borrarCat(int id_categoria) {
+        this.con = FactoryConexionDB.open(FactoryConexionDB.MySQL);
+        boolean borrar = false;
+        try {
+            StringBuilder myQuery = new StringBuilder();
+            myQuery.append("DELETE FROM tb_categoria WHERE id_categoria = '").append(id_categoria).append("';");
+            this.con.ejecutarSQL(myQuery.toString());
+            borrar = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            this.con.cerraConexion();
+        }
+        return borrar;
+    }   
 }
