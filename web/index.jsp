@@ -14,9 +14,9 @@
     </head>
     <body>
         <%@include file = "WEB-INF/Vistas-Parciales/encabezado.jspf" %>
-        <h3>Bienvenido</h3>
+        <h3>Bienvenido </h3>
         <a href="Index" class="btn btn-dark">Inicio</a>
-        <a href="Categorias" class="btn btn-dark">Categorias</a>
+        <a href="Categorias?opcion=listar" class="btn btn-dark">Categorias</a>
         <%@include file = "WEB-INF/Vistas-Parciales/pie.jspf" %>
     </body>
 </html>

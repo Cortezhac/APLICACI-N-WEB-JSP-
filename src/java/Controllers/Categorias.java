@@ -7,6 +7,7 @@ package Controllers;
 
 import DAO.CategoriaDAO;
 import DAO.CategoriaImplemtarDAO;
+import Model.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,23 +36,10 @@ public class Categorias extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Categorias</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Categorias at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     protected void listaCategorias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        
         //Crear instancia a CategoriasDAO
         CategoriaDAO categoria = new CategoriaImplemtarDAO();
         HttpSession session = request.getSession(true);
@@ -63,8 +51,15 @@ public class Categorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.listaCategorias(request, response);
-
+        String opcion = request.getParameter("opcion");
+        System.out.println("opcion " + opcion);
+        if(opcion.equalsIgnoreCase("crear")){
+            String direcion = "/VistasCategorias/crearCategorias.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(direcion);
+            dispatcher.forward(request, response);
+        }else if(opcion.equalsIgnoreCase("listar")){
+            this.listaCategorias(request, response);
+        }
     //processRequest(request, response);
     }
 
@@ -79,7 +74,17 @@ public class Categorias extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Categoria categoria = new Categoria();
+        
+        categoria.setId_categoria(Integer.parseInt(request.getParameter("Id_categoria")));
+        categoria.setNom_categoria(request.getParameter("txtNombreCat"));
+        categoria.setEstado_categoria(Integer.parseInt(request.getParameter("txtEstadoCat")));
+        
+        //Objeto de acceso a los datos
+        CategoriaDAO guardarCategoria = new CategoriaImplemtarDAO();
+        guardarCategoria.guardarCat(categoria);
+        this.listaCategorias(request, response);
+        //processRequest(request, response);
     }
 
     /**

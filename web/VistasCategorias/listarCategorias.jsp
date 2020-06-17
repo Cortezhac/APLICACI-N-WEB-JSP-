@@ -18,7 +18,7 @@
         <%@include file = "../WEB-INF/Vistas-Parciales/encabezado.jspf" %>
         <div class="row contenido justify-content-center">
             <div class="col-sm-10 p-2">
-                <a href="#" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                <a href="<%=request.getContextPath()%>/Categorias?opcion=crear" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</a>
                 <h3>Listado de categorias</h3>
                 <table class="table table-striped">
                     <thead>
@@ -39,7 +39,6 @@
                             for(int i = 0; i < lista.size(); i++){
                                 Categoria categoria = new Categoria();
                                 categoria = (Categoria)lista.get(i); // Casting
-                        
                         %>
                         <tr>
                             <td><%=categoria.getNom_categoria()%></td>
@@ -49,7 +48,7 @@
                                 <a href="#" role="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></i></a>
                             </td>
                         </tr>
-                        <% }%>
+                        <%  } %>
                     </tbody>
                 </table>
             </div>
